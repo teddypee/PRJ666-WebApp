@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Time Travel Machine", "Time Travel Machine\Time Travel Machine.csproj", "{C2E0ABA2-1250-4527-B1F6-6CF37485217A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2E0ABA2-1250-4527-B1F6-6CF37485217A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2E0ABA2-1250-4527-B1F6-6CF37485217A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2E0ABA2-1250-4527-B1F6-6CF37485217A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2E0ABA2-1250-4527-B1F6-6CF37485217A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {373DC41A-0D2B-44C6-831D-3CD825373342}
+	EndGlobalSection
+EndGlobal
