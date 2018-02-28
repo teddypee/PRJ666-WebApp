@@ -12,26 +12,33 @@
 <p>
     @Html.ActionLink("What to make a change", "AddOneCR","ChangeRequest")
 </p>
-
+<div style="margin-bottom:2%;">
 @using (Html.BeginForm("FilterIndex", "ChangeRequest"))
 {
+    <fieldset>
+        <legend>Filter:</legend>
+    <table>
+        <tr><td>
     <p>
-        @Html.Label("Region");
+        @Html.Label("Region")
         @Html.DropDownList("ddlregion", (IEnumerable<SelectListItem>)ViewBag.ddlregions);
-    </p>
+    </p></td><td>
     <p>
-        @Html.Label("Category");
+        @Html.Label("Category")
         @Html.DropDownList("ddlcategory", (IEnumerable<SelectListItem>)ViewBag.ddlcategorys);
-    </p>
+    </p></td><td>
     <p>
-        @Html.Label("Year");
+        @Html.Label("Year")
         @Html.DropDownList("ddlyear", (IEnumerable<SelectListItem>)ViewBag.ddlyears);
-    </p>
-    <p>
-        <input type="submit" value="Submit">
-    </p>
+    </p></td>
+            </tr>
+    <tr><td></td><td></td><td >
+        <input type="submit" value="Filter" style="float:right">
+    </td></tr>
+    </table>
+    </fieldset>
 }
-
+</div>
 <table class="table">
     <tr>
         <th>Picture
@@ -39,39 +46,29 @@
         <th>
             @Html.DisplayNameFor(model => model.Change_Request_Id)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Region_Id)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.regionName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category_Id)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.categoryName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content_Id)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.Content_Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.year)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.userid)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.usename)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Lastupdatetime)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.picture_id)
-        </th>
+
         <th></th>
     </tr>
 
@@ -87,39 +84,29 @@
         <td>
             @Html.DisplayFor(modelItem => item.Change_Request_Id)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Region_Id)
-        </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.regionName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category_Id)
-        </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.categoryName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content_Id)
-        </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.Content_Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.year)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.userid)
-        </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.usename)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Lastupdatetime)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.picture_id)
-        </td>
+
         <td>
             @Html.ActionLink("Promote","Promote","ChangeRequest", new { crid = item.Change_Request_Id,userid = 1 },new { id="GoPromote" }) |
             @Html.ActionLink("See more", "Details", "ChangeRequest",new { crid = item.Change_Request_Id },null) 
