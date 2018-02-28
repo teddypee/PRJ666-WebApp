@@ -12,10 +12,18 @@ namespace Time_Travel_Machine.Controllers
         // GET: Category
         public ActionResult Index(int selectedregionId = 0)
         {
-            ViewBag.S_regionId = selectedregionId;
+            //for testing 
+            ViewBag.S_regionId = 1;
+            //ViewBag.S_regionId = selectedregionId;
+
+
             if (selectedregionId != 0)
             {
                 ViewBag.S_regionName = m.GetRegionName(selectedregionId);
+            }
+            else
+            {
+                ViewBag.S_regionName = "Haven't select a region for searching!";
             }
             return View("Index");
         }
