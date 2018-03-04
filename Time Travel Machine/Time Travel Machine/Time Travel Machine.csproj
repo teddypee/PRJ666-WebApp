@@ -146,6 +146,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ChangeRequestController.cs" />
+    <Compile Include="Controllers\HisContentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Manager.cs" />
     <Compile Include="Global.asax.cs">
@@ -153,6 +154,7 @@
     </Compile>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Change_Request.cs" />
+    <Compile Include="Models\Content.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -199,9 +201,11 @@
     <Content Include="Views\ChangeRequest\AddChangeRequest.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\ChangeRequest\crfilterIndex.cshtml" />
+    <Content Include="Views\HisContent\hisCIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Image\" />
     <Folder Include="UploadPicture\" />
     <Folder Include="Views\Manager\" />
   </ItemGroup>

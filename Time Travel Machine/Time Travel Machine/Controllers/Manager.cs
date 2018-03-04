@@ -11,12 +11,12 @@ namespace Time_Travel_Machine.Controllers
 {
     public class Manager : Controller
     {
-        // not done
+        //use in out owned machine
         private const string mysqlconnection = "server=myvmlab.senecacollege.ca;port=6079;user id=student;password=Group09;database=g9;charset=utf8;";
+        //publish on server use the folloing
+        //private const string mysqlconnection = "server=localhost;port=3306;user id=root;password=Group09;database=g9;charset=utf8;";
         MySqlConnection conn = new MySqlConnection();
-        //private ApplicationDbContext ds = new ApplicationDbContext();
-        //public IMapper mapper = AutoMapperConfig.RegisterMappings();
-        //temp ChangeRequest
+
         #region ChangeRequest
         public List<Change_Request_Index> GetAllChangeRequest_Index()
         {
@@ -57,8 +57,7 @@ WHERE cr.Active = 1 ORDER BY cr.Last_Update_Date_Time";
             }
             conn.Close();
             return c;
-            //var allobj = ds.ChangeRequests.orderby(i => i.Change_Request_Id);
-            //return (allobj == null) ? null : mapper.Map<IEnumerable<ChangeRequestBase>>(o);
+
         }
         public List<Change_Request_Index> GetAllChangeRequest_Index_with_filter(int rid, int cid, int yearcode)
         {
@@ -685,6 +684,71 @@ WHERE cr.Active = 1";// ORDER BY cr.Last_Update_Date_Time";
 
         #endregion
 
+        #region Content
+
+        public List<ContentIndex> GetContentIndex(int rid,int cid)
+        {
+            //decide the length of the partial introduction
+            int substringlength = 30;
+
+            conn.ConnectionString = mysqlconnection;
+            if (conn.State != ConnectionState.Open)
+            {
+                conn.Open();
+            }
+            var contentList = new List<ContentIndex>();
+            //active = 1 means its an active row
+            var sqlcmd = @"SELECT c.* ,r.regionName AS Region_Name,ca.Category_Name AS Category_Name,u.Name AS UserName,p.Picture_Path AS Path FROM content c LEFT JOIN region r ON (r.regionID = c.Region_Id) 
+  LEFT JOIN category ca ON (ca.Category_Id = c.Category_Id) LEFT JOIN user u ON(u.User_Id = c.Last_Update_User_Id) LEFT JOIN picture p ON(p.Picture_Id = c.Picture_Id) WHERE c.Active = 1 ";
+            if (rid != 0) {
+                sqlcmd = sqlcmd + @" AND c.Region_Id = @rid ";
+            }
+
+            if(cid != 0)
+            {
+                sqlcmd = sqlcmd + @" AND c.Category_Id = @cid ";
+            }
+            sqlcmd = sqlcmd + @" ORDER BY c.Content_Name";
+            using (var cmd = new MySqlCommand(sqlcmd, conn))
+            {
+                if (rid != 0)
+                {
+                    cmd.Parameters.AddWithValue("@rid", rid);
+                }
+                if (cid != 0)
+                {
+                    cmd.Parameters.AddWithValue("@cid", cid);
+                }
+                using (MySqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        var content = new ContentIndex();
+                        content.Region_Id = Convert.ToInt32(rd["Region_Id"]);
+                        content.regionName = rd["Region_Name"].ToString();
+                        content.Category_Id = Convert.ToInt32(rd["Category_Id"]);
+                        content.categoryName = rd["Category_Name"].ToString();
+                        content.Content_Id = Convert.ToInt32(rd["Content_Id"]);
+                        content.Content_Name = rd["Content_Name"].ToString();
+                        content.picname = rd["Path"].ToString();
+                        content.detail = rd["Detail"].ToString().Substring(0,substringlength);
+                        content.year = Convert.ToInt32(rd["Year"]);
+                        content.picture_id = Convert.ToInt32(rd["Year"]);
+                        content.userid = Convert.ToInt32(rd["Last_Update_User_Id"]);
+                        content.usename = rd["UserName"].ToString();
+                        content.Lastupdatetime = Convert.ToDateTime(rd["Last_Update_Date_Time"]);
+                        contentList.Add(content);
+                    }
+                }
+            }
+            conn.Close();
+
+
+            return contentList;
+        }
+
+
+        #endregion 
         // GET: Manager
         public ActionResult Index()
         {

@@ -7,5 +7,54 @@
 <p>
 You have already selected Region <span>@ViewBag.S_regionName<</span> 
 
-    Select a category 
+    Select a category to approach your target ...
 </p>
+
+
+<table>
+ <tr>
+     <th>
+        Warefare
+     </th>
+     <th>
+        Event
+     </th>
+     <th>
+         Regime
+     </th>
+     <th>
+         Celebrity
+     </th>
+     <th>
+         Others
+         </th>
+ </tr>
+    <tr>
+        <td>
+            <input type="image" src="Image/Warfare.jpg" alt="warfare" width="300" height="200" id="warfare">
+        </td>
+        <td><input type="image" src="" alt="Event" width="300" height="200"  ></td>
+        <td><input type="image" src="Image/Regime.jpg" alt="Regime" width="300" height="200" id="regime" ></td>
+        <td><input type="image" src="" alt="Celebrity" width="300" height="200"  ></td>
+        <td><input type="image" src="" alt="Others" width="300" height="200"  ></td>
+    </tr>
+
+</table>
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#warfare").click(function() {
+            var url = '@Url.Action("Index", "HisContent", new { @regionId = ViewBag.S_regionId})';
+            url = url + '&categoryId=1';
+            window.location.href = url;
+        });
+
+        $("#regime").click(function(){
+
+            var url = '@Url.Action("Index", "HisContent", new { @regionId = ViewBag.S_regionId })';
+            url = url + '&categoryId=3';
+            window.location.href = url;
+        });
+
+    });
+</script>
