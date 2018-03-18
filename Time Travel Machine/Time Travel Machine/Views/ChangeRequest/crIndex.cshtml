@@ -7,12 +7,18 @@
     
 
     </head>
-<h2>crIndex</h2>
+<h2>Change Request Index</h2>
 
 <p>
     @Html.ActionLink("What to make a change", "AddOneCR","ChangeRequest")
 </p>
 <div style="margin-bottom:2%;">
+
+    @if (ViewBag.msg != string.Empty)
+    {
+        <p style="color:darkblue" >@ViewBag.msg</p>
+    }
+       
 @using (Html.BeginForm("FilterIndex", "ChangeRequest"))
 {
     <fieldset>
@@ -21,15 +27,15 @@
         <tr><td>
     <p>
         @Html.Label("Region")
-        @Html.DropDownList("ddlregion", (IEnumerable<SelectListItem>)ViewBag.ddlregions);
+        @Html.DropDownList("ddlregion", (IEnumerable<SelectListItem>)ViewBag.ddlregions)
     </p></td><td>
     <p>
         @Html.Label("Category")
-        @Html.DropDownList("ddlcategory", (IEnumerable<SelectListItem>)ViewBag.ddlcategorys);
+        @Html.DropDownList("ddlcategory", (IEnumerable<SelectListItem>)ViewBag.ddlcategorys)
     </p></td><td>
     <p>
         @Html.Label("Year")
-        @Html.DropDownList("ddlyear", (IEnumerable<SelectListItem>)ViewBag.ddlyears);
+        @Html.DropDownList("ddlyear", (IEnumerable<SelectListItem>)ViewBag.ddlyears)
     </p></td>
             </tr>
     <tr><td></td><td></td><td >
@@ -117,6 +123,7 @@
 </table>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
+
    /* $(function () {
         $("#btnGet").click(function () {
             $.ajax({
@@ -137,4 +144,7 @@
         });
 
     });*/
+    /*
 </script>
+
+

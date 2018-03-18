@@ -7,7 +7,7 @@
 
 
 </head>
-<h2>crIndex</h2>
+<h2>Change Request Index</h2>
 
 <p>
     @Html.ActionLink("What to make a change", "AddOneCR", "ChangeRequest")
@@ -23,19 +23,19 @@
                     <td>
                         <p>
                             @Html.Label("Region")
-                            @Html.DropDownList("ddlregion", (IEnumerable<SelectListItem>)ViewBag.ddlregions);
+                            @Html.DropDownList("ddlregion", (IEnumerable<SelectListItem>)ViewBag.ddlregions)
                         </p>
                     </td>
                     <td>
                         <p>
                             @Html.Label("Category")
-                            @Html.DropDownList("ddlcategory", (IEnumerable<SelectListItem>)ViewBag.ddlcategorys);
+                            @Html.DropDownList("ddlcategory", (IEnumerable<SelectListItem>)ViewBag.ddlcategorys)
                         </p>
                     </td>
                     <td>
                         <p>
                             @Html.Label("Year")
-                            @Html.DropDownList("ddlyear", (IEnumerable<SelectListItem>)ViewBag.ddlyears);
+                            @Html.DropDownList("ddlyear", (IEnumerable<SelectListItem>)ViewBag.ddlyears)
                         </p>
                     </td>
                 </tr>

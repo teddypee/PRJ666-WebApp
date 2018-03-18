@@ -4,14 +4,13 @@
     ViewBag.Title = "crDetails";
 }
 
-<h2>crDetails</h2>
 
 <div>
-    <h4>Change_Request</h4>
+    <h4>Change Request</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Change_Request_Id)
+            Change Request ID
         </dt>
 
 
@@ -27,16 +26,9 @@
                 <img src="../UploadPicture/@Model.picname" alt="@Model.Content_Name" width="120" height="120">
             }
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Region_Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Region_Id)
-        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.regionName)
+            Region
         </dt>
 
         <dd>
@@ -44,31 +36,17 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Category_Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category_Id)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.categoryName)
+            Category
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.categoryName)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Content_Id)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Content_Id)
-        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Content_Name)
+            Name
         </dt>
 
         <dd>
@@ -76,63 +54,22 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.year)
+            Year
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.year)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.userid)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.userid)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.usename)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.usename)
-        </dd>
+
+
+
 
         <dt>
-            @Html.DisplayNameFor(model => model.Lastupdatetime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Lastupdatetime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.picture_id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.picture_id)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.wiki_key)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.wiki_key)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.video_key)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.video_key)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.reason)
+            The Reason to Do this Change
         </dt>
 
         <dd>
@@ -140,7 +77,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.detail)
+            Detail
         </dt>
 
         <dd>
@@ -148,7 +85,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.request_type)
+            Request Type
         </dt>
 
         <dd>
@@ -156,16 +93,43 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.active)
+            Wiki
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.active)
+            @if (Model.wiki_key != string.Empty)
+            {
+                <iframe src="@Model.wiki_key" scrolling="yes" frameborder="1" width="720" height="360"></iframe>
+            }
         </dd>
 
+        <dt>
+            Video
+        </dt>
+
+        <dd>
+            @if (Model.video_key != string.Empty)
+            {
+                <iframe src="@Model.video_key" scrolling="yes" frameborder="1" width="720" height="480"></iframe>
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.usename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usename)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Lastupdatetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lastupdatetime)
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+
     @Html.ActionLink("Back to List", "Index","ChangeRequest")
 </p>
