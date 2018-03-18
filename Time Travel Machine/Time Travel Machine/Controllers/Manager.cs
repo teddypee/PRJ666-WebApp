@@ -45,11 +45,23 @@ WHERE cr.Active = 1 ORDER BY cr.Last_Update_Date_Time";
                     ci.Category_Id = Convert.ToInt32(rd["Category_Id"]);
                     ci.Content_Id = Convert.ToInt32(rd["Content_Id"]);
                     ci.Content_Name = rd["Content_Name"].ToString();
-                    ci.year = Convert.ToInt32(rd["Year"]);
-                    ci.userid = Convert.ToInt32(rd["Update_User_Id"]);
+                    if (rd["Year"] != DBNull.Value)
+                    {
+                        ci.year = Convert.ToInt32(rd["Year"]);
+                    }
+                    if (rd["Update_User_Id"] != DBNull.Value)
+                    {
+                        ci.userid = Convert.ToInt32(rd["Update_User_Id"]);
+                    }
                     ci.usename = rd["UserName"].ToString();
-                    ci.Lastupdatetime = Convert.ToDateTime(rd["Last_Update_Date_Time"]);
-                    ci.picture_id = Convert.ToInt32(rd["Picture_Id"]);
+                    if (rd["Last_Update_Date_Time"] != DBNull.Value)
+                    {
+                        ci.Lastupdatetime = Convert.ToDateTime(rd["Last_Update_Date_Time"]);
+                    }
+                    if (rd["Picture_Id"] != DBNull.Value)
+                    {
+                        ci.picture_id = Convert.ToInt32(rd["Picture_Id"]);
+                    }
                     ci.picname = rd["Path"].ToString();
                     
                     c.Add(ci);
@@ -158,11 +170,23 @@ WHERE cr.Active = 1";// ORDER BY cr.Last_Update_Date_Time";
                         ci.Category_Id = Convert.ToInt32(rd["Category_Id"]);
                         ci.Content_Id = Convert.ToInt32(rd["Content_Id"]);
                         ci.Content_Name = rd["Content_Name"].ToString();
-                        ci.year = Convert.ToInt32(rd["Year"]);
-                        ci.userid = Convert.ToInt32(rd["Update_User_Id"]);
+                        if (rd["Year"] != DBNull.Value)
+                        {
+                            ci.year = Convert.ToInt32(rd["Year"]);
+                        }
+                        if (rd["Update_User_Id"] != DBNull.Value)
+                        {
+                            ci.userid = Convert.ToInt32(rd["Update_User_Id"]);
+                        }
                         ci.usename = rd["UserName"].ToString();
-                        ci.Lastupdatetime = Convert.ToDateTime(rd["Last_Update_Date_Time"]);
-                        ci.picture_id = Convert.ToInt32(rd["Picture_Id"]);
+                        if (rd["Last_Update_Date_Time"] != DBNull.Value)
+                        {
+                            ci.Lastupdatetime = Convert.ToDateTime(rd["Last_Update_Date_Time"]);
+                        }
+                        if (rd["Picture_Id"] != DBNull.Value)
+                        {
+                            ci.picture_id = Convert.ToInt32(rd["Picture_Id"]);
+                        }
                         ci.picname = rd["Path"].ToString();
 
                         c.Add(ci);
@@ -200,13 +224,23 @@ WHERE cr.Active = 1";// ORDER BY cr.Last_Update_Date_Time";
                         ci.categoryName = rd["Category_Name"].ToString();
                         ci.Content_Id = Convert.ToInt32(rd["Content_Id"]);
                         ci.Content_Name = rd["Content_Name"].ToString();
-                        ci.year = Convert.ToInt32(rd["Year"]);
-                        ci.userid = Convert.ToInt32(rd["Update_User_Id"]);
+                        if (rd["Year"] != DBNull.Value)
+                        {
+                            ci.year = Convert.ToInt32(rd["Year"]);
+                        }
+                        if (rd["Update_User_Id"] != DBNull.Value)
+                        {
+                            ci.userid = Convert.ToInt32(rd["Update_User_Id"]);
+                        }
+                        
                         ci.Lastupdatetime = Convert.ToDateTime(rd["Last_Update_Date_Time"]);
                         ci.video_key = rd["Video_Key"].ToString();
                         ci.wiki_key = rd["Wiki_Key"].ToString();
                         ci.detail = rd["Detail"].ToString();
-                        ci.picture_id = Convert.ToInt32(rd["Picture_Id"]);
+                        if (rd["Picture_Id"] != DBNull.Value)
+                        {
+                            ci.picture_id = Convert.ToInt32(rd["Picture_Id"]);
+                        }
                         ci.reason = (rd["Reason"]).ToString();
                         ci.picname = rd["Path"].ToString();
 
@@ -689,7 +723,7 @@ WHERE cr.Active = 1";// ORDER BY cr.Last_Update_Date_Time";
         public List<ContentIndex> GetContentIndex(int rid,int cid)
         {
             //decide the length of the partial introduction
-            int substringlength = 30;
+            int substringlength = 40;
 
             conn.ConnectionString = mysqlconnection;
             if (conn.State != ConnectionState.Open)
@@ -730,13 +764,40 @@ WHERE cr.Active = 1";// ORDER BY cr.Last_Update_Date_Time";
                         content.categoryName = rd["Category_Name"].ToString();
                         content.Content_Id = Convert.ToInt32(rd["Content_Id"]);
                         content.Content_Name = rd["Content_Name"].ToString();
-                        content.picname = rd["Path"].ToString();
-                        content.detail = rd["Detail"].ToString().Substring(0,substringlength);
-                        content.year = Convert.ToInt32(rd["Year"]);
-                        content.picture_id = Convert.ToInt32(rd["Year"]);
-                        content.userid = Convert.ToInt32(rd["Last_Update_User_Id"]);
-                        content.usename = rd["UserName"].ToString();
-                        content.Lastupdatetime = Convert.ToDateTime(rd["Last_Update_Date_Time"]);
+                        
+                        if (rd["Detail"].ToString().Length > substringlength)
+                        {
+                            content.detail = rd["Detail"].ToString().Substring(0, substringlength);
+                        }
+                        else
+                        {
+                            content.detail = rd["Detail"].ToString();
+                        }
+                        if (rd["Year"] != DBNull.Value)
+                        {
+                            content.year = Convert.ToInt32(rd["Year"]);
+                        }
+                        if (rd["Picture_Id"] != DBNull.Value)
+                        {
+                            content.picture_id = Convert.ToInt32(rd["Picture_Id"]);
+                        }
+                        if (rd["Path"] != DBNull.Value)
+                        {
+                            content.picname = rd["Path"].ToString();
+                        }
+                        if (rd["Last_Update_User_Id"] != DBNull.Value)
+                        {
+                            content.userid = Convert.ToInt32(rd["Last_Update_User_Id"]);
+                        }
+                        if (rd["UserName"] != DBNull.Value)
+                        {
+
+                            content.usename = rd["UserName"].ToString();
+                        }
+                        if (rd["Last_Update_Date_Time"] != DBNull.Value)
+                        {
+                            content.Lastupdatetime = Convert.ToDateTime(rd["Last_Update_Date_Time"]);
+                        }
                         contentList.Add(content);
                     }
                 }
@@ -747,8 +808,190 @@ WHERE cr.Active = 1";// ORDER BY cr.Last_Update_Date_Time";
             return contentList;
         }
 
+        public Content GetOneHisContent(int conId)
+        {
+            var content = new Content();
 
-        #endregion 
+            conn.ConnectionString = mysqlconnection;
+            if (conn.State != ConnectionState.Open)
+            {
+                conn.Open();
+            }
+            var sqlcmd = @"SELECT c.* ,r.regionName AS Region_Name,ca.Category_Name AS Category_Name,u.Name AS UserName,p.Picture_Path AS Path FROM content c LEFT JOIN region r ON (r.regionID = c.Region_Id) 
+  LEFT JOIN category ca ON (ca.Category_Id = c.Category_Id) LEFT JOIN user u ON(u.User_Id = c.Last_Update_User_Id) LEFT JOIN picture p ON(p.Picture_Id = c.Picture_Id) WHERE c.Content_Id = @conId ";
+            
+
+            using (var cmd = new MySqlCommand(sqlcmd, conn))
+            {
+                cmd.Parameters.AddWithValue("@conId", conId);
+                using (MySqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        
+                        content.Region_Id = Convert.ToInt32(rd["Region_Id"]);
+                        content.regionName = rd["Region_Name"].ToString();
+                        content.Category_Id = Convert.ToInt32(rd["Category_Id"]);
+                        content.categoryName = rd["Category_Name"].ToString();
+                        content.Content_Id = Convert.ToInt32(rd["Content_Id"]);
+                        content.Content_Name = rd["Content_Name"].ToString();
+                        content.detail = rd["Detail"].ToString();
+                        if (rd["Year"] != DBNull.Value)
+                        {
+                            content.year = Convert.ToInt32(rd["Year"]);
+                        }
+                        if (rd["Picture_Id"] != DBNull.Value)
+                        {
+                            content.picture_id = Convert.ToInt32(rd["Picture_Id"]);
+                        }
+                        if (rd["Path"] != DBNull.Value)
+                        {
+                            content.picname = rd["Path"].ToString();
+                        }
+                        if (rd["Last_Update_User_Id"] != DBNull.Value)
+                        {
+                            content.userid = Convert.ToInt32(rd["Last_Update_User_Id"]);
+                        }
+                        if (rd["UserName"] != DBNull.Value)
+                        {
+
+                            content.usename = rd["UserName"].ToString();
+                        }
+                        if (rd["Last_Update_Date_Time"] != DBNull.Value)
+                        {
+                            content.Lastupdatetime = Convert.ToDateTime(rd["Last_Update_Date_Time"]);
+                        }
+                        content.video = rd["Video_Key"].ToString();
+                        content.wiki = rd["Wiki_Key"].ToString();
+
+                    }
+                }
+            }
+            conn.Close();
+            return content;
+        }
+
+
+        #endregion
+
+        #region Filter
+
+        public int GetContinentId(string selectedregionId)
+        {
+            var continentId = 0;
+            conn.ConnectionString = mysqlconnection;
+            if (conn.State != ConnectionState.Open)
+            {
+                conn.Open();
+            }
+            var sqlcmd = @"SELECT Continent_Id FROM region WHERE regionID = @rid";
+            using (var cmd = new MySqlCommand(sqlcmd, conn))
+            {
+                cmd.Parameters.AddWithValue("@rid", selectedregionId);
+                using (MySqlDataReader rd = cmd.ExecuteReader())
+                {
+                    if (rd.Read())
+                    {
+                        continentId = Convert.ToInt32(rd["Continent_Id"]);
+
+
+                    }
+                }
+            }
+            conn.Close();
+            return continentId;
+
+        }
+
+        public List<YearDDL> GetYearDDL(int continentId)
+        {
+            var years = new List<YearDDL>();
+            conn.ConnectionString = mysqlconnection;
+            if (conn.State != ConnectionState.Open)
+            {
+                conn.Open();
+            }
+            var sqlcmd = @"SELECT y.* FROM year y WHERE y.Continent_Id = @contId  ORDER BY y.Year_Id";
+            using (var cmd = new MySqlCommand(sqlcmd, conn))
+            {
+                cmd.Parameters.AddWithValue("@contId", continentId);
+                using (MySqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        var year = new YearDDL();
+                        year.Year = Convert.ToInt32(rd["Continent_Id"]);
+                        year.description = rd["description"].ToString();
+                        year.YearId = rd["Year_Id"].ToString();
+                        year.continentId = continentId.ToString();
+                        //yearddlvalue - last digit = orginal year_id, in order to be used in Filters
+                        year.yearddlvalue = year.YearId + year.continentId;
+                        years.Add(year);
+                    }
+                }
+            }
+            conn.Close();
+
+            return years;
+        }
+        public List<YearDDL> GetYearDDL(string continentId,int year)
+        {
+            var years = new List<YearDDL>();
+            conn.ConnectionString = mysqlconnection;
+            if (conn.State != ConnectionState.Open)
+            {
+                conn.Open();
+            }
+            var sqlcmd = @"SELECT y.* FROM year y WHERE (y.Continent_Id = @contId AND y.year > @year ) OR (y.Continent_Id = @contId AND y.Year_Id = 999 )   ORDER BY y.Year_Id";
+            using (var cmd = new MySqlCommand(sqlcmd, conn))
+            {
+                cmd.Parameters.AddWithValue("@contId", continentId);
+                cmd.Parameters.AddWithValue("@year", year);
+                using (MySqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        var y = new YearDDL();
+                        y.Year = Convert.ToInt32(rd["Continent_Id"]);
+                        y.description = rd["description"].ToString();
+                        y.YearId = rd["Year_Id"].ToString();
+                        y.continentId = continentId.ToString();
+                        //yearddlvalue - last digit(continent_Id) = orginal year_id, in order to be used in Filters
+                        y.yearddlvalue = y.YearId + y.continentId;
+                        years.Add(y);
+                    }
+                }
+            }
+            conn.Close();
+
+            return years;
+        }
+        public int GetYearByYearIdandContinentId(string yearid,string continentid)
+        {
+            conn.ConnectionString = mysqlconnection;
+            if (conn.State != ConnectionState.Open)
+            {
+                conn.Open();
+            }
+            int year = 0;
+            var sqlcmd = @"SELECT y.year FROM year y WHERE y.Year_Id = @yId and y.Continent_Id = @contId";
+            using (var cmd = new MySqlCommand(sqlcmd, conn))
+            {
+                cmd.Parameters.AddWithValue("@contId", continentid);
+                cmd.Parameters.AddWithValue("@yId", yearid);
+                using (MySqlDataReader rd = cmd.ExecuteReader())
+                {
+                    if (rd.Read())
+                    {
+
+                        year= Convert.ToInt32( rd["year"]);
+                    }
+                }
+            }
+            conn.Close();
+            return year;
+        } 
+        #endregion
         // GET: Manager
         public ActionResult Index()
         {

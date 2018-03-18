@@ -13,8 +13,8 @@ namespace Time_Travel_Machine.Controllers
         public ActionResult Index(int selectedregionId = 0)
         {
             //for testing 
-            ViewBag.S_regionId = 1;
-            //ViewBag.S_regionId = selectedregionId;
+            //ViewBag.S_regionId = 1;
+            ViewBag.S_regionId = selectedregionId;
 
 
             if (selectedregionId != 0)

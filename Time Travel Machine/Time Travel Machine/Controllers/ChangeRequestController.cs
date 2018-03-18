@@ -15,7 +15,7 @@ namespace Time_Travel_Machine.Controllers
         const int promote_required = 3;
         // GET: ChangeRequest
         //temp
-        public ActionResult Index()
+        public ActionResult Index(int msg = 0)
         {
             List<SelectListItem> regionList = new List<SelectListItem>();
             List<SelectListItem> categoryList = new List<SelectListItem>();
@@ -60,7 +60,21 @@ namespace Time_Travel_Machine.Controllers
             ViewBag.ddlcategorys = categoryList;
             ViewBag.ddlyears = yearList;
             var model = m.GetAllChangeRequest_Index();
-            
+
+            if (msg == 0)
+            {
+                ViewBag.msg = string.Empty;
+            }else if (msg == 1)
+            {
+                ViewBag.msg = "You have already promote this request!";
+            }else if(msg == 2)
+            {
+                ViewBag.msg = "The request has been transfered!";
+            }else if(msg == 3)
+            {
+                ViewBag.msg = "Promote Success!";
+            }
+
             return View("crIndex",model);
         }
 
@@ -110,6 +124,9 @@ namespace Time_Travel_Machine.Controllers
             ViewBag.ddlcategorys = categoryList;
             ViewBag.ddlyears = yearList;
             var model = m.GetAllChangeRequest_Index_with_filter(Convert.ToInt32(ddlregion), Convert.ToInt32(ddlcategory), Convert.ToInt32(ddlyear));
+
+
+
 
             return View("crfilterIndex", model);
         }
@@ -169,7 +186,16 @@ namespace Time_Travel_Machine.Controllers
             newchange.Region_Id = Convert.ToInt32(ddlregionforCR);
             newchange.Category_Id = Convert.ToInt32(ddlcategoryforCR);
             newchange.picture_id = picid;
-            newchange.year = Convert.ToInt32(year);
+
+            if (string.IsNullOrWhiteSpace(year) )
+            {
+                int n;
+                var isNumeric = int.TryParse(year , out n);
+                if (isNumeric)
+                {
+                    newchange.year = Convert.ToInt32(year);
+                }
+            }
             newchange.video_key = video;
             newchange.wiki_key = wiki;
             newchange.Content_Name = contentname;
@@ -196,7 +222,7 @@ namespace Time_Travel_Machine.Controllers
             if (promote_exist)// means the user already promote this change request
             {
                 //return Json(100);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { msg = 1});
             }
 
 
@@ -208,10 +234,11 @@ namespace Time_Travel_Machine.Controllers
             if (amount >= promote_required)
             {
                 m.transfer(crid);
+                return RedirectToAction("Index", new { msg = 2});
             }
-
+            
             //return Json(result);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { msg = 3});
 
         }
 
