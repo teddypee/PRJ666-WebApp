@@ -20,6 +20,7 @@ namespace Time_Travel_Machine.Models
         public DateTime Lastupdatetime { get; set; }
         public int picture_id { get; set; }
         public string picname { get; set; }
+        public int active { get; set; }
     }
 
     public class Change_Request : Change_Request_Index
@@ -29,8 +30,8 @@ namespace Time_Travel_Machine.Models
         public string reason { get; set; }
         public string detail { get; set; }
         public int request_type { get; set; }
-        public int active { get; set; }
 
+        public string extent { get; set; }
 
     }
 

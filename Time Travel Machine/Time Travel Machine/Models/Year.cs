@@ -5,13 +5,12 @@ using System.Web;
 
 namespace Time_Travel_Machine.Models
 {
-    public class YearDDL
+    public class YearOptions
     {
-        public int Year { get; set; }
+        public int yearid { get; set; }
+        public int continentid { get; set; }
         public string description { get; set; }
-        public string YearId { get; set; }
-        public string continentId { get; set; }
-        public string yearddlvalue { get; set; }
+        public int year { get; set; }
         public int active { get; set; }
     }
 }
