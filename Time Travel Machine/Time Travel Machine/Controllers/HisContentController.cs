@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -24,7 +25,7 @@ namespace Time_Travel_Machine.Controllers
                 continentId = m.GetContinentId("1");
             }
             var years = m.GetYearDDL(continentId);
-
+            years = years.Where(y => y.active == 1).ToList();
             var yearselectlist = new SelectList(years, "yearddlvalue", "description");
             ViewBag.yearselectlist = yearselectlist;
             ViewBag.seletedreid = regionId;
@@ -63,7 +64,7 @@ namespace Time_Travel_Machine.Controllers
                 continentId = m.GetContinentId("1");
             }
             var years = m.GetYearDDL(continentId);
-
+            years = years.Where(y => y.active == 1).ToList();
             var yearselectlist = new SelectList(years, "yearddlvalue", "description");
             ViewBag.yearselectlist = yearselectlist;
             ViewBag.seletedreid = regionId;
@@ -119,7 +120,16 @@ namespace Time_Travel_Machine.Controllers
             //
             if (!string.IsNullOrWhiteSpace(searchstring))
             {
-                contents = contents.Where(c => c.Content_Name.Contains(searchstring)).ToList();
+                bool isNumber = Regex.IsMatch(searchstring, @"^\d+$");
+                if (isNumber)
+                {
+                    int searchNumber = Convert.ToInt32(searchstring);
+                    contents = contents.Where(c => c.year == searchNumber).ToList();
+                }
+                else
+                {
+                    contents = contents.Where(c => c.Content_Name.ToLower().Contains(searchstring.ToLower())).ToList();
+                }
             }
             return View("FilterctIndex", contents);
         }
@@ -145,6 +155,7 @@ namespace Time_Travel_Machine.Controllers
                 
                 //get endyear ddl
                 var years = m.GetYearDDL(continentid,startyear);
+                years = years.Where(y => y.active == 1).ToList();
                 if (years.Count() > 0)
                 {
                     foreach (var y in years)
@@ -156,6 +167,12 @@ namespace Time_Travel_Machine.Controllers
 
 
             return Json(yearlist);
+        }
+
+        public ActionResult SearchAll(string headersearchstring = "")
+        {
+
+            return RedirectToAction("FilterIndex", new { searchstring = headersearchstring });
         }
 
         // GET: Content/Create
