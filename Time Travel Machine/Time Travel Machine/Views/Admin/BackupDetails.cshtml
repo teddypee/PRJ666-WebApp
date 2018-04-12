@@ -1,0 +1,147 @@
+﻿@model Time_Travel_Machine.Models.Backup_Content
+
+@{
+    ViewBag.Title = "BackupDetails";
+}
+
+<h2>BackupDetails</h2>
+
+<div>
+    <h4>Backup_Content</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Region_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Region_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.regionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.regionName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.categoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.categoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lastupdatetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lastupdatetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.picture_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.picture_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.picname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.picname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detail)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wiki)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wiki)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.video)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.video)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.extent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.extent)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    
+    @Html.ActionLink("Back to List", "AdBackup","Admin")
+</p>

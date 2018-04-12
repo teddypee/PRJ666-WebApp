@@ -62,15 +62,23 @@
        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.detail)
+            Detail
         </dt>
 
         <dd>
-            <div style="margin:5px;">
+            <p style="margin:5px;">
                 @Html.DisplayFor(model => model.detail)
-            </div>
+            </p>
         </dd>
+        <dt>
+            
+        </dt>
 
+        <dd>
+            <p style="margin:5px;">
+                @Html.DisplayFor(model => model.extent)
+            </p>
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.wiki)
         </dt>
@@ -96,5 +104,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Want to make a change?", "CreateCRforEdit", "ChangeRequest",new { contentid = Model.Content_Id },null)
 </p>

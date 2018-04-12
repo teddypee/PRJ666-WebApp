@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Time_Travel_Machine.Models.YearOptions>
+
+@{
+    ViewBag.Title = "AdYear";
+}
+
+<h2>Year Options</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Year Id
+        </th>
+        <th>
+            Continent Id
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Year
+        </th>
+        <th>
+            Status
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.yearid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.continentid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.year)
+        </td>
+        <td>
+            @if (item.active == 0)
+            {
+                <span style="color:red">Inactive</span>
+            }
+            else
+            {
+                <span style="color:black">Active</span>
+            }
+        </td>
+        <td>
+            @if (item.active == 1)
+            {
+                <button type="button" class="AdminActivate" id="@item.continentid.ToString()+@item.yearid.ToString()">Deactivate</button>
+            }
+            else
+            {
+                <button type="button" class="AdminActivate" id="@item.continentid.ToString()+@item.yearid.ToString()">Activate</button>
+            }
+        </td>
+    </tr>
+}
+
+</table>
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $(".AdminActivate").click(function () {
+                var yearcode = $(this).attr("id");
+                var continentid = yearcode.substring(0, 1);
+                var yearid = yearcode.substring(1, yearcode.length);
+                ChangeYearsStatus(yearid,continentid);
+            });
+
+
+        });
+
+        function ChangeYearsStatus(yearid,continentid) {
+            $.ajax({
+                url: '@Url.Action("ChangeYearsStatus", "Admin")',
+                data: { yearid: yearid, continentid: continentid },
+                type: 'post',
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    alert("Status Change Successfully.");
+                    location.reload(true);
+                }
+            });
+        }
+
+
+
+</script>

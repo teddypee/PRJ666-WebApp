@@ -26,6 +26,28 @@
                     <li>@Html.ActionLink("ChangeRequest", "Index", "ChangeRequest")</li>
                     <li>@Html.ActionLink("Category", "Index", "Category")</li>
                     <li>@Html.ActionLink("Content", "Index", "HisContent")</li>
+                    <li>
+                        <div class="btn-group" style="margin:8px">
+                            <button class="btn">Admin</button>
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <!-- dropdown menu links -->
+                                <li>@Html.ActionLink("Content", "AdContent", "Admin")</li>
+                                <li>@Html.ActionLink("Change Request", "AdChangeRequest", "Admin")</li>
+                                <li>@Html.ActionLink("Users", "AdUsers", "Admin")</li>
+                                <li>@Html.ActionLink("Year", "AdYear", "Admin")</li>
+                                <li>@Html.ActionLink("Back Up", "AdBackup", "Admin")</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><div style="margin:10px;"> @using (Html.BeginForm("SearchAll", "HisContent"))
+                    {
+                       <span></span><input type="text" id="headersearchstring" name="headersearchstring" />
+                        <input type="submit" value="Search" style="">
+
+                    }</div></li>
                 </ul>
             </div>
         </div>

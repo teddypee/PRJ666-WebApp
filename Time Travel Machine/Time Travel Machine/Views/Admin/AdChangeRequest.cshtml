@@ -1,19 +1,13 @@
 ﻿@model IEnumerable<Time_Travel_Machine.Models.Change_Request_Index>
 
 @{
-    ViewBag.Title = "crIndex";
+    ViewBag.Title = "AdChangeRequest";
 }
-<head>
-    
 
-    </head>
-<h2>Change Request Index</h2>
+<h2>Admin Change Request Index</h2>
 
-<p>
-    @Html.ActionLink("What to make a change", "AddOneCR","ChangeRequest")
-</p>
 <div style="margin-bottom:2%;">
-    @using (Html.BeginForm("Index", "ChangeRequest"))
+    @using (Html.BeginForm("AdChangeRequest", "Admin"))
     {
         <fieldset>
             <legend>Filter:</legend>
@@ -67,34 +61,41 @@
     <table class="table">
         <tr>
             <th>
-                Picture
-            </th>
-            @*<th>
-                Id
-            </th*@>
+                Change_Request_Id
 
+            </th>
+            <th>
+                Region Id
+            </th>
             <th>
                 Region
             </th>
-
+            <th>
+                Category Id
+            </th>
             <th>
                 Category
             </th>
-
             <th>
-                Name
+                Content Id
+            </th>
+            <th>
+                Content
             </th>
             <th>
                 Year
             </th>
-
             <th>
-                User
+                User Id
             </th>
             <th>
-                Upload Time
+                User Name
             </th>
-            <th></th>
+            <th>
+                Update Date
+            </th>
+            <th>Details</th>
+            <th>Status</th>
             <th></th>
         </tr>
 
@@ -102,31 +103,32 @@
         {
             <tr>
                 <td>
-                    @if (item.picname != string.Empty)
-                    {
-
-                        <img src="UploadPicture/@item.picname" @*alt="@item.Content_Name"*@ width="45" height="45">
-                    }
-                </td>
-                @*<td>
                     @Html.DisplayFor(modelItem => item.Change_Request_Id)
-                </td>*@
-
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Region_Id)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.regionName)
                 </td>
-
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category_Id)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.categoryName)
                 </td>
-
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content_Id)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Content_Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.year)
                 </td>
-
+                <td>
+                    @Html.DisplayFor(modelItem => item.userid)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.usename)
                 </td>
@@ -134,47 +136,58 @@
                     @Html.DisplayFor(modelItem => item.Lastupdatetime)
                 </td>
                 <td>
-                    <button type="button" class="requestPromote" id="@item.Change_Request_Id">Promote</button>
+
+                    @Html.ActionLink("See more", "Details", "ChangeRequest", new { crid = item.Change_Request_Id }, null)
+
                 </td>
                 <td>
+                    @if (item.active == 0)
+                    {
+                        <span style="color:red">Inactive</span>
+                    }
+                    else
+                    {
+                        <span style="color:black">Active</span>
+                    }
                     
-                    @Html.ActionLink("See more", "Details", "ChangeRequest", new { crid = item.Change_Request_Id }, null)
+
+                </td>
+                <td>
+                    @if (item.active == 1)
+                    {
+                        <button type="button" class="AdminActivate" id="@item.Change_Request_Id">Deactivate</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="AdminActivate" id="@item.Change_Request_Id">Activate</button>
+                    }
                 </td>
             </tr>
         }
 
-    </table></div>
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript">
-
+    </table>
+    </div>
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" language="javascript">
         $(document).ready(function () {
-            $(".requestPromote").click(function () {
+            $(".AdminActivate").click(function () {
                 var crid = $(this).attr("id");
-                PromoteCR(crid);
+                ChangeCReqStatus(crid);
             });
 
             $('#ddlstartyear').change(function () { ChangeStartYear(); });
         });
 
-        function PromoteCR(crId) {
-            var dummyuserid = 1;
+        function ChangeCReqStatus(crId) {
             $.ajax({
-                url: '@Url.Action("Promote", "ChangeRequest")',
-                data: { crid: crId, userid : dummyuserid },
+                url: '@Url.Action("ChangeCReqStatus", "Admin")',
+                data: { changeRId: crId },
                 type: 'post',
                 cache: false,
                 async: false,
                 dataType: 'json',
                 success: function (data) {
-                    if (data == "exist") {
-                        alert("You have already promote this topic.");
-                    }
-                    if (data == "tran") {
-                        alert("Promote Successfully. The topic has been transfered.");
-                    }
-                    if (data == "succ") {
-                        alert("Status Change Successfully.");
-                    }
+                    alert("Status Change Successfully.");
                     location.reload(true);
                 }
             });
@@ -208,5 +221,3 @@
         }
 
     </script>
-
-

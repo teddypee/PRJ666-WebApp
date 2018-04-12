@@ -1,0 +1,174 @@
+﻿@model IEnumerable<Time_Travel_Machine.Models.Backup_Content>
+
+@{
+    ViewBag.Title = "AdBackup";
+}
+
+<h2>AdBackup</h2>
+<div style="margin-bottom:2%;">
+    @using (Html.BeginForm("AdBackup", "Admin"))
+    {
+        <fieldset>
+            <legend>Filter:</legend>
+            <table>
+                <tr>
+                    <td>
+                        <p>
+                            @Html.Label("Region")
+                            @Html.DropDownList("ddlregion", (IEnumerable<SelectListItem>)ViewBag.ddlregions)
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            @Html.Label("Category")
+                            @Html.DropDownList("ddlcategory", (IEnumerable<SelectListItem>)ViewBag.ddlcategorys)
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            @Html.Label("Start Year")
+                            @Html.DropDownList("ddlstartyear", (SelectList)ViewBag.yearselectlist)
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            @Html.Label("End Year")
+                            <select id="ddlendyear" name="ddlendyear"><option>------</option></select>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            @Html.Label("Name/ID of Content")
+                            <input type="text" name="searchstring" id="searchstring">
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Filter" style="float:right">
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Region_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.regionName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.categoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lastupdatetime)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Region_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.regionName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.categoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lastupdatetime)
+        </td>
+
+        <td>
+            
+            @Html.ActionLink("Details", "BackupDetails", "Admin", new { contentid = item.Content_Id }, null) 
+            
+        </td>
+    </tr>
+}
+
+</table>
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+
+
+        $('#ddlstartyear').change(function () { ChangeStartYear(); });
+    });
+
+
+
+    function ChangeStartYear() {
+        var selectedValue = $('#ddlstartyear option:selected').val();
+        if ($.trim(selectedValue).length > 0) {
+            GetYears(selectedValue);
+        }
+    }
+
+    function GetYears(yearID) {
+        $.ajax({
+            url: '@Url.Action("GetEndYearDDL", "HisContent")',
+            data: { startyearcode: yearID },
+            type: 'post',
+            cache: false,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                if (data.length > 0) {
+                    $('#ddlendyear').empty();
+                    $('#ddlendyear').append($('<option></option>').val('').text('select the End Year'));
+                    $.each(data, function (i, item) {
+                        $('#ddlendyear').append($('<option></option>').val(item.Key).text(item.Value));
+                    });
+                }
+            }
+        });
+    }
+
+</script>

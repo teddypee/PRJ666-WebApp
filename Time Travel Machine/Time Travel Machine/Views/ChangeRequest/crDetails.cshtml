@@ -9,14 +9,14 @@
     <h4>Change Request</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+        @*<dt>
             Change Request ID
         </dt>
 
 
         <dd>
             @Html.DisplayFor(model => model.Change_Request_Id)
-        </dd>
+        </dd>*@
         <dt>
             Picture
         </dt>
@@ -72,25 +72,29 @@
             The Reason to Do this Change
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.reason)
+        <dd><p>
+            @Html.DisplayFor(model => model.reason)</p>
         </dd>
 
         <dt>
             Detail
         </dt>
 
-        <dd>
+        <dd><p>
             @Html.DisplayFor(model => model.detail)
+            </p>
+            <p>
+                @Html.DisplayFor(model => model.extent)
+            </p>
         </dd>
 
-        <dt>
+        @*<dt>
             Request Type
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.request_type)
-        </dd>
+        </dd>*@
 
         <dt>
             Wiki
@@ -113,15 +117,15 @@
                 <iframe src="@Model.video_key" scrolling="yes" frameborder="1" width="720" height="480"></iframe>
             }
         </dd>
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.usename)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.usename)
-        </dd>
+        </dd>*@
         <dt>
-            @Html.DisplayNameFor(model => model.Lastupdatetime)
+            The Upload Date
         </dt>
 
         <dd>

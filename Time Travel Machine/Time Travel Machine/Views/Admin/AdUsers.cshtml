@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Time_Travel_Machine.Models.HisUser>
+
+@{
+    ViewBag.Title = "AdUsers";
+}
+
+<h2>AdUsers</h2>
+<div style="margin-bottom:2%;">
+    @using (Html.BeginForm("AdUsers", "Admin"))
+    {
+        <fieldset>
+            <legend>Filter:</legend>
+            <table>
+                <tr>
+                    <td>
+                        <p>
+                            @Html.Label("User Type")
+                            @Html.DropDownList("ddlusertype", (IEnumerable<SelectListItem>)ViewBag.ddlusertype)
+                        </p>
+                    </td>
+
+                    <td>
+                        <p>
+                            @Html.Label("Name/ID of User/E-mail")
+                            <input type="text" name="searchstring" id="searchstring">
+                        </p>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Filter" style="float:right">
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    }
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            User Id
+        </th>
+        <th>
+            User Name
+        </th>
+        <th>
+            Email
+        </th>
+
+
+        <th>
+            User Type
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.userid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+
+        <td>
+            <span style="">
+                @Html.DisplayFor(modelItem => item.usertypeDescription)
+            </span>
+        
+        </td>
+        <td>
+            @if (item.usertype == 1)
+            {
+                <button type="button" class="AdminActivate" id="@item.userid">Approve to Admin</button>
+            }
+            else
+            {
+                <button type="button" class="AdminActivate" id="@item.userid">Demotion</button>
+            }
+        </td>
+    </tr>
+}
+
+</table>
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $(".AdminActivate").click(function () {
+                var userid = $(this).attr("id");
+                ChangeUserStatus(userid);
+            });
+
+           
+        });
+
+        function ChangeUserStatus(userid) {
+            $.ajax({
+                url: '@Url.Action("ChangeUsertype", "Admin")',
+                data: { userid: userid },
+                type: 'post',
+                cache: false,
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    alert("Status Change Successfully.");
+                    location.reload(true);
+                }
+            });
+        }
+
+
+
+</script>
