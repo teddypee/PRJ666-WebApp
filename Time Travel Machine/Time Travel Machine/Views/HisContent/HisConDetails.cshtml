@@ -1,0 +1,108 @@
+﻿@model Time_Travel_Machine.Models.Content
+
+@{
+    ViewBag.Title = "HisConDetails";
+}
+
+
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @if (Model.picname != string.Empty)
+            {
+
+                <img src="../UploadPicture/@Model.picname" alt="@Model.Content_Name" width="120" height="100">
+            }
+        </dt>
+
+        <dd><h2>
+            @Html.DisplayFor(model => model.Content_Name)
+            </h2>
+        </dd>
+
+        <dt>
+            Region
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.regionName)
+        </dd>
+
+
+        <dt>
+            Category
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.categoryName)
+        </dd>
+
+
+
+
+
+        <dt>
+            Year
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.year)
+        </dd>
+
+        <dt>
+            
+        </dt>
+
+        <dd>
+            
+
+       </dd>
+
+        <dt>
+            Detail
+        </dt>
+
+        <dd>
+            <p style="margin:5px;">
+                @Html.DisplayFor(model => model.detail)
+            </p>
+        </dd>
+        <dt>
+            
+        </dt>
+
+        <dd>
+            <p style="margin:5px;">
+                @Html.DisplayFor(model => model.extent)
+            </p>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.wiki)
+        </dt>
+
+        <dd>
+            @if (Model.wiki != string.Empty)
+            {
+                <iframe src="@Model.wiki" scrolling="yes" frameborder="1" width="720" height="360"></iframe>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.video)
+        </dt>
+
+        <dd>
+            @if (Model.video != string.Empty)
+            {
+                <iframe src="@Model.video" scrolling="yes" frameborder="1" width="720" height="480" ></iframe>
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index") | @Html.ActionLink("Want to make a change?", "CreateCRforEdit", "ChangeRequest",new { contentid = Model.Content_Id },null)
+</p>

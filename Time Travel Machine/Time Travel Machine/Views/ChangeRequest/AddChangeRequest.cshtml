@@ -3,48 +3,122 @@
     ViewBag.Title = "AddChangeRequest";
 }
 
-<h2>AddChangeRequest</h2>
+<h2>Create a Change Request</h2>
 
-@using (Html.BeginForm("AddOneChangeRequest","ChangeRequest",FormMethod.Post,new {enctype = "multipart/form-data" }))
+<p>Do you think the current application miss something important in the history? Or you think the description is not good enough? Make a change!</p>
+
+@using (Html.BeginForm("AddOneChangeRequest", "ChangeRequest", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <p>
-        @Html.Label("Region")
-        @Html.DropDownList("ddlregionforCR",(IEnumerable<SelectListItem>)ViewBag.ddlregions)
-    </p>
-    <p>
-        @Html.Label("Category")
-        @Html.DropDownList("ddlcategoryforCR", (IEnumerable<SelectListItem>)ViewBag.ddlcategorys)
-    </p>
-    <p>
-        @Html.Label("Name of the Content")
-        <input type="text" name="contentname" id="contentname">
-    </p>
-    <p>
-        @Html.Label("Year")
-        <input type="text" name="year" id="year">
-    </p>
-    <p>
-        @Html.Label("Explain your expectation")
-        <textarea name="reason" id="reason"></textarea>
-    </p>
-    <p>
-        @Html.Label("Basic Introduction")
-        <textarea name="detail" id="detail"></textarea>
-    </p>
-    <p>
-        @Html.Label("Add a link to get more information?")
-        <input type="text" name="wiki" id="wiki">
-    </p>
-    <p>
-        @Html.Label("Add a video link to get more information?")
-        <input type="text" name="video" id="video">
-    </p>
-    <p>
-        @Html.Label("What to add a picture?");
-        <input type="file" name="picfile" id="picfile">
-    </p>
-    <p>
-        <input type="submit" value="Submit">
-    </p>
-
+    <table>
+        <tr>
+            <td>
+                <p>
+                    @Html.Label("Region")
+                </p>
+            </td>
+            <td>
+                <p>
+                    @Html.DropDownList("ddlregionforCR", (IEnumerable<SelectListItem>)ViewBag.ddlregions)
+                </p>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    @Html.Label("Category")
+                </p>
+            </td>
+            <td>
+                <p>
+                    @Html.DropDownList("ddlcategoryforCR", (IEnumerable<SelectListItem>)ViewBag.ddlcategorys)
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    @Html.Label("Name of the Content")
+                </p>
+            </td>
+            <td>
+                <p>
+                    <input type="text" name="contentname" id="contentname">
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    @Html.Label("Year")
+                </p>
+            </td>
+            <td>
+                <p>
+                    <input type="text" name="year" id="year">
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    @Html.Label("Explain your expectation")
+                </p>
+            </td>
+            <td>
+                <p>
+                    <textarea name="reason" id="reason" maxlength="500" rows="8" cols="60"></textarea>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    @Html.Label("Basic Introduction")
+                </p><p>
+            </td>
+            <td>
+                <p>
+                    <textarea name="detail" id="detail" maxlength="3000" rows="8" cols="60"></textarea>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    @Html.Label("Add a link to get more information?")
+                </p>
+            </td>
+            <td>
+                <p>
+                    <input type="text" name="wiki" id="wiki">
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    @Html.Label("Add a video link to get more information?")</p></td><td><p>
+                    <input type="text" name="video" id="video">
+                </p></td></tr><tr>
+    <td>
+        <p>
+            @Html.Label("What to add a picture?");
+        </p>
+    </td>
+    <td>
+        <p>
+            <input type="file" name="picfile" id="picfile">
+        </p>
+    </td>
+</tr>
+<tr>
+    <td></td><td>
+        <p>
+            <input type="submit" value="Submit">
+        </p></td></tr>
+</table>
 }
+
+<p>
+
+    @Html.ActionLink("Back to List", "Index", "ChangeRequest")
+</p>

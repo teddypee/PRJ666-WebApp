@@ -14,4 +14,9 @@ namespace Time_Travel_Machine.Models
         public string password { get; set; }
 
     }
+
+    public class HisUser : Account
+    {
+        public string usertypeDescription { get; set; }
+    }
 }

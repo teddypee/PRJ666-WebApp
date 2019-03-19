@@ -1,0 +1,220 @@
+﻿@model IEnumerable<Time_Travel_Machine.Models.ContentIndex>
+
+@{
+    ViewBag.Title = "AdContent";
+}
+
+<h2>Admin Content Index</h2>
+<div style="margin-bottom:2%;">
+    @using (Html.BeginForm("AdContent", "Admin"))
+    {
+        <fieldset>
+            <legend>Filter:</legend>
+            <table>
+                <tr>
+                    <td>
+                        <p>
+                            @Html.Label("Region")
+                            @Html.DropDownList("ddlregion", (IEnumerable<SelectListItem>)ViewBag.ddlregions)
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            @Html.Label("Category")
+                            @Html.DropDownList("ddlcategory", (IEnumerable<SelectListItem>)ViewBag.ddlcategorys)
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            @Html.Label("Start Year")
+                            @Html.DropDownList("ddlstartyear", (SelectList)ViewBag.yearselectlist)
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            @Html.Label("End Year")
+                            <select id="ddlendyear" name="ddlendyear"><option>------</option></select>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            @Html.Label("Name/ID of Content")
+                            <input type="text" name="searchstring" id="searchstring">
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Filter" style="float:right">
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    }
+</div>
+<div style="overflow:auto;height:400px;">
+<table class="table">
+    <tr>
+        <th>
+            Region Id
+        </th>
+        <th>
+            Region
+        </th>
+        <th>
+            Category Id 
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Content Id 
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Year
+        </th>
+        <th>
+            Last Update User Id
+        </th>
+        <th>
+            Last Update User Name 
+        </th>
+        <th>
+            Last Update Date 
+        </th>
+
+        
+        <th>Details</th>
+        <th>Status</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Region_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.regionName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.categoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.usename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lastupdatetime)
+        </td>
+
+        <td>
+            
+            @Html.ActionLink("See more", "Details", "HisContent", new { conId = item.Content_Id }, null)
+            
+        </td>
+        <td>
+
+            @if(item.Active == 0)
+            {
+                <span style="color:red">Inactive</span>
+            }
+            else
+            {
+                <span style="color:black">Active</span>
+            }
+
+        </td>
+        <td>
+            @if(item.Active == 1)
+            {
+                <button type="button" class="AdminActivate" id="@item.Content_Id">Deactivate</button>
+            }
+            else
+            {
+                <button type="button" class="AdminActivate" id="@item.Content_Id">Activate</button>
+            }
+
+
+        </td>
+    </tr>
+}
+
+</table>
+</div>
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        $(".AdminActivate").click(function () {
+            var contentId = $(this).attr("id");
+            ChangeContentStatus(contentId);
+        });
+
+        $('#ddlstartyear').change(function () { ChangeStartYear(); });
+    });
+
+    function ChangeContentStatus(contentId) {
+        $.ajax({
+            url: '@Url.Action("ChangeContentStatus", "Admin")',
+            data: { contentId: contentId },
+            type: 'post',
+            cache: false,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                alert("Status Change Successfully.");
+                location.reload(true);
+            }
+        });
+    }
+
+
+    function ChangeStartYear() {
+        var selectedValue = $('#ddlstartyear option:selected').val();
+        if ($.trim(selectedValue).length > 0) {
+            GetYears(selectedValue);
+        }
+    }
+
+    function GetYears(yearID) {
+        $.ajax({
+            url: '@Url.Action("GetEndYearDDL", "HisContent")',
+            data: { startyearcode: yearID },
+            type: 'post',
+            cache: false,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                if (data.length > 0) {
+                    $('#ddlendyear').empty();
+                    $('#ddlendyear').append($('<option></option>').val('').text('select the End Year'));
+                    $.each(data, function (i, item) {
+                        $('#ddlendyear').append($('<option></option>').val(item.Key).text(item.Value));
+                    });
+                }
+            }
+        });
+    }
+
+</script>

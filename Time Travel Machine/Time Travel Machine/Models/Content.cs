@@ -20,6 +20,7 @@ namespace Time_Travel_Machine.Models
         public int picture_id { get; set; }
         public string picname { get; set; }
         public string detail { get; set; }
+        public int Active { get; set; }
     }
 
 
@@ -28,5 +29,11 @@ namespace Time_Travel_Machine.Models
     {
         public string wiki { get; set; }
         public string video { get; set; }
+        public string extent { get; set; }
+    }
+
+    public class Backup_Content : Content
+    {
+
     }
 }

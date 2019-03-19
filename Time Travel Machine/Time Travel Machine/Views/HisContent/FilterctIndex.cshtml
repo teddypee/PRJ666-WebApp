@@ -7,8 +7,8 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Want to Create a New One","Index", "ChangeRequest") || @Html.ActionLink("View All", "Index", "HisContent") 
-    || @Html.ActionLink("Go Back", "Index", "Category",new { selectedregionId = ViewBag.seletedreid },null)
+    @Html.ActionLink("Want to Create a New One", "Index", "ChangeRequest") || @Html.ActionLink("View All", "Index", "HisContent")
+    || @Html.ActionLink("Go Back", "Index", "Category", new { selectedregionId = ViewBag.seletedreid }, null)
 </p>
 
 
@@ -56,9 +56,9 @@
         </th>
 
         <th>
-            Region 
+            Region
         </th>
- 
+
         <th>
             Category
         </th>
@@ -82,7 +82,7 @@
                 @if (item.picname != string.Empty)
                 {
 
-                    <img src="UploadPicture/@item.picname" alt="@item.Content_Name" width="45" height="45">
+                    <img src="../UploadPicture/@item.picname" alt="@item.Content_Name" width="45" height="45">
                 }
             </td>
 
@@ -108,9 +108,9 @@
                 @Html.DisplayFor(modelItem => item.detail)
             </td>
             <td>
-                
-                @Html.ActionLink("See more", "Details","HisContent", new { conId = item.Content_Id },null) 
- 
+
+                @Html.ActionLink("See more", "Details", "HisContent", new { conId = item.Content_Id }, null)
+
             </td>
         </tr>
     }
@@ -149,4 +149,5 @@
             }
         });
     }
-    </script>
+</script>
+

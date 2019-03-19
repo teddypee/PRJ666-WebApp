@@ -3,43 +3,33 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Category Index</h2>
-<p>
-You have already selected Region <span>@ViewBag.S_regionName<</span> 
+<h2>Category</h2>
+<p>@if (ViewBag.S_regionId != 0) {
+    <span>You have already selected Region </span> 
+}<span> @ViewBag.S_regionName </span> 
 
-    Select a category to approach your target ...
+    Select a category to approach your target!
 </p>
 
+<div>
+    <table>
+        <tr>
+            <td><input type="image" src="~/Image/Warfare.jpg" alt="warfare" width="200" height="200" id="warfare"></td>
+            <td><p style="width:180px;"><span style="color:darkslateblue;font:bold;font-size:medium;font-style:italic;">Events</span> are the special things happened in the history and strongly impact the international system or the way of history such as Dissolution of the Soviet Union and Assassination of Archduke Franz Ferdinand of Austria.</p></td>
+            <td><input type="image" src="~/Image/Regime.jpg" alt="Regime" width="200" height="200" id="regime"></td>
+            <td><p style="width:180px;"><span style="color:darkslateblue;font:bold;font-size:medium;font-style:italic;">Others</span> lists contents that are not in the Warfare, Regimes, Events and Celebrity, such as Art works and buildings.</p></td>
+            <td><input type="image" src="~/Image/TEMP.PNG" alt="Celebrity" width="200" height="200" id="celebrity"></td>
+        </tr>
+        <tr>
+            <td><p style="width:180px;padding-top:1px;"><span style="color:darkslateblue;font:bold;font-size:medium;font-style:italic;">Warfare</span> includes all kinds of armed conflict,battles,war,military alliance or something is related to the Art of war.</p></td>
+            <td><input type="image" src="~/Image/TEMP.PNG" alt="Event" width="200" height="200" id="hisevent"></td>
+            <td><p style="width:180px;"><span style="color:darkslateblue;font:bold;font-size:medium;font-style:italic;">Regimes</span> includes all kinds of polictical entities including vessels, tribes,sovereign states and confederation. </p></td>
+            <td><input type="image" src="~/Image/TEMP.PNG" alt="Others" width="200" height="200" id="others"></td>
+            <td><p style="width:180px;"><span style="color:darkslateblue;font:bold;font-size:medium;font-style:italic;">Celebrity</span> are people who play an important role in the history including kings, statesman, generals, scientists and so on.</p></td>
+        </tr>
+    </table>
+</div>
 
-<table>
- <tr>
-     <th>
-        Warefare
-     </th>
-     <th>
-        Event
-     </th>
-     <th>
-         Regime
-     </th>
-     <th>
-         Celebrity
-     </th>
-     <th>
-         Others
-         </th>
- </tr>
-    <tr>
-        <td>
-            <input type="image" src="Image/Warfare.jpg" alt="warfare" width="300" height="200" id="warfare">
-        </td>
-        <td><input type="image" src="" alt="Event" width="300" height="200"  ></td>
-        <td><input type="image" src="Image/Regime.jpg" alt="Regime" width="300" height="200" id="regime" ></td>
-        <td><input type="image" src="" alt="Celebrity" width="300" height="200"  ></td>
-        <td><input type="image" src="" alt="Others" width="300" height="200"  ></td>
-    </tr>
-
-</table>
 <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script>
     $(document).ready(function(){
@@ -49,10 +39,30 @@ You have already selected Region <span>@ViewBag.S_regionName<</span>
             window.location.href = url;
         });
 
+        $("#hisevent").click(function () {
+            var url = '@Url.Action("Index", "HisContent", new { @regionId = ViewBag.S_regionId})';
+            url = url + '&categoryId=2';
+            window.location.href = url;
+        });
+
         $("#regime").click(function(){
 
             var url = '@Url.Action("Index", "HisContent", new { @regionId = ViewBag.S_regionId })';
             url = url + '&categoryId=3';
+            window.location.href = url;
+        });
+
+        $("#celebrity").click(function () {
+
+            var url = '@Url.Action("Index", "HisContent", new { @regionId = ViewBag.S_regionId })';
+            url = url + '&categoryId=4';
+            window.location.href = url;
+        });
+
+        $("#others").click(function () {
+
+            var url = '@Url.Action("Index", "HisContent", new { @regionId = ViewBag.S_regionId })';
+            url = url + '&categoryId=5';
             window.location.href = url;
         });
 
